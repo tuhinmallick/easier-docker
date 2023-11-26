@@ -28,7 +28,7 @@ class EasierDocker:
                     print(f'Status: {status}, Progress: {progress}')
             print(f'Docker pull {self.image_name} finish')
         except Exception as e:
-            print(str(e))
+            print(e)
 
     def _get_container(self) -> Union[Container, None]:
         print(f'Finding {self.container_name} docker container in local')
@@ -51,8 +51,7 @@ class EasierDocker:
 
     def start(self):
         self._get_image()
-        container = self._get_container()
-        if container:
+        if container := self._get_container():
             container.start()
         else:
             self._run_container()
